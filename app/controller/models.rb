@@ -40,17 +40,25 @@ end
 class AllTests
   include Swagger::Blocks
   $tests_hash.each do |guid, val|
-    swagger_path "/#{val['path']}" do
+    warn "doing #{guid}"
+    swagger_path "/#{val['operation_path']}" do
+      operation :get do
+        key :description, "Return the SWAGGER interface definition for all Champion tests, and FAIR Champion itself"
+        key :operationId, "#{guid}_interface"
+        key :produces, [
+          'application/json'
+        ]
+      end
       operation :post do
         key :description, (val['description']).to_s
-        key :version, val['version'].to_s
+        key 'x-version', val['version'].to_s
         key 'x-identifier', guid
         key :operationId, "#{guid}_execute"
         key :tags, [(val['title']).to_s]
         key 'x-applies_to_principle', val['applies_to_principle'].to_s
         key 'x-tests-metric', val['tests_metric'].to_s
         key 'x-author-name', [(val['responsible_developer']).to_s]
-        key 'email', [(val['email']).to_s]
+        key 'x-email', [(val['email']).to_s]
         key 'x-author-id', [(val['developer_ORCiD']).to_s]
         key 'x-organization', [(val['organization']).to_s]
         key 'x-org-url', [(val['org_url']).to_s]
@@ -70,7 +78,7 @@ class AllTests
           end
         end
         response 200 do
-          key :description, 'Test Response'
+          key :description, (val['response_description']).to_s
           schema do
             key :'$ref', :EvalResponse
           end

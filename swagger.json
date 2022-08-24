@@ -1,0 +1,190 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "version": "1.0.0",
+        "title": "FAIR Champion Testing Service",
+        "description": "Tests the metadata of your stuff",
+        "termsOfService": "https://fairdata.services/Champion/terms/",
+        "contact": {
+            "name": "Mark D Wilkinson",
+            "organization": "FAIR Data Systems S.L.",
+            "email": "info@fairdata.systems"
+        },
+        "license": {
+            "name": "MIT"
+        }
+    },
+    "tags": [
+        {
+            "name": "FAIR Champion Tester",
+            "description": "All Tests",
+            "externalDocs": {
+                "description": "Find more info here",
+                "url": "https://fairdata.services/Champion/about"
+            }
+        }
+    ],
+    "schemes": [
+        "http"
+    ],
+    "host": "fairdata.services:9003",
+    "basePath": "/tests",
+    "paths": {
+        "//gen3_rich_metadata": {
+            "post": {
+                "description": "mark grich metadata",
+                "version": "999",
+                "x-identifier": "https://w3id.org/FAIR-Tests/gen3_rich_metadata",
+                "operationId": "https://w3id.org/FAIR-Tests/gen3_rich_metadata_execute",
+                "tags": [
+                    "generation 3 test for rich metadata"
+                ],
+                "x-applies_to_principle": "F1",
+                "x-tests-metric": "https://w3id.org/RDA-FAIR-Maturity/F1.1",
+                "x-author-name": [
+                    "Mark D Wilkinson"
+                ],
+                "email": [
+                    "mark.wilkinson@upm.es"
+                ],
+                "x-author-id": [
+                    ""
+                ],
+                "x-organization": [
+                    "Wilkinson Laboratory"
+                ],
+                "x-org-url": [
+                    "https://ror.org/04mfzb702"
+                ],
+                "produces": [
+                    "application/ld+json"
+                ],
+                "consumes": [
+                    "application/ld+json"
+                ],
+                "parameters": [
+                    {
+                        "name": "guid",
+                        "in": "body",
+                        "description": "The GUID to test",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/InputScheme"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "output from the rich metadata test",
+                        "schema": {
+                            "$ref": "#/definitions/EvalResponse"
+                        }
+                    },
+                    "default": {
+                        "description": "unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
+                    }
+                }
+            }
+        },
+        "/gen3_unique_identifier": {
+            "post": {
+                "description": "mark gest uniq id",
+                "version": "999",
+                "x-identifier": "https://w3id.org/FAIR-Tests/gen3_unique_identifier",
+                "operationId": "https://w3id.org/FAIR-Tests/gen3_unique_identifier_execute",
+                "tags": [
+                    "generation 3 test for a unique identifier"
+                ],
+                "x-applies_to_principle": "F1",
+                "x-tests-metric": "https://w3id.org/RDA-FAIR-Maturity/F1.1",
+                "x-author-name": [
+                    "Mark D Wilkinson"
+                ],
+                "email": [
+                    "mark.wilkinson@upm.es"
+                ],
+                "x-author-id": [
+                    ""
+                ],
+                "x-organization": [
+                    "Wilkinson Laboratory"
+                ],
+                "x-org-url": [
+                    "https://ror.org/04mfzb702"
+                ],
+                "produces": [
+                    "application/ld+json"
+                ],
+                "consumes": [
+                    "application/ld+json"
+                ],
+                "parameters": [
+                    {
+                        "name": "guid",
+                        "in": "body",
+                        "description": "The GUID to test",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/InputScheme"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "output from the unique data identifier test",
+                        "schema": {
+                            "$ref": "#/definitions/EvalResponse"
+                        }
+                    },
+                    "default": {
+                        "description": "unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "ErrorModel": {
+            "required": [
+                "code",
+                "message"
+            ],
+            "properties": {
+                "code": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "message": {
+                    "type": "string"
+                }
+            }
+        },
+        "InputScheme": {
+            "required": [
+                "guid"
+            ],
+            "properties": {
+                "guid": {
+                    "type": "string"
+                }
+            }
+        },
+        "EvalResponse": {
+            "required": [
+                "placeholder"
+            ],
+            "properties": {
+                "placeholder": {
+                    "type": "integer",
+                    "format": "int32"
+                }
+            }
+        }
+    }
+}
